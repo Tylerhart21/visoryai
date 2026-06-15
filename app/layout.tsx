@@ -1,21 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "next-themes";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "AI Gateway Demo",
-  description: "A demo of the Vercel AI Gateway with the AI SDK by Vercel",
+  metadataBase: new URL(
+    process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "http://localhost:3000",
+  ),
+  title: "Visory AI — See Further. Sell Faster.",
+  description:
+    "Exclusive, pre-qualified personal injury leads delivered straight to your firm. Pay per result — every lead is yours alone, never shared with a competing attorney.",
+  icons: {
+    icon: "/assets/logo.png",
+  },
+  openGraph: {
+    title: "Visory AI — See Further. Sell Faster.",
+    description:
+      "Exclusive, pre-qualified personal injury leads delivered straight to your firm. Pay per result — never shared with a competing attorney.",
+    images: ["/assets/logo-full.png"],
+  },
 };
 
 export default function RootLayout({
@@ -24,19 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-      </body>
+    <html lang="en">
+      <body className="grain">{children}</body>
     </html>
   );
 }
